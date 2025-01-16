@@ -1,3 +1,6 @@
+[submodule "queuetie-gateway"]
+	path = queuetie-gateway
+	url = git@github.com:dejan-babic-symphony/queuetie-gateway.git
 [submodule "queuetie-app"]
-	path = packages/queuetie-app
+	path = queuetie-app
 	url = git@github.com:dejan-babic-symphony/queuetie-app.git

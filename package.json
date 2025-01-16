@@ -7,7 +7,7 @@
     "url": "git+https://github.com/dejan-babic-symphony/queuetie.git"
   },
   "keywords": [
-    "workspace"
+    "monorepo"
   ],
   "author": "dejan-babic-symphony",
   "license": "ISC",
@@ -16,9 +16,6 @@
   },
   "homepage": "https://github.com/dejan-babic-symphony/queuetie#readme",
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
