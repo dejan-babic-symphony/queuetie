@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Navigate to the root of your project
+cd "$(git rev-parse --show-toplevel)"
+
+# Loop through all submodules inside the 'packages/' directory and update them
+for submodule in packages/*; do
+  if [ -d "$submodule/.git" ]; then
+    echo "Updating submodule: $submodule"
+    cd $submodule
+    git fetch origin
+    git pull origin main  # Adjust the branch as needed
+    cd -  # Go back to the root directory
+  fi
+done
+
+# Check if any submodule references have been updated
+if [[ $(git status --porcelain) =~ "packages/" ]]; then
+  git add packages/*
+  git commit -m "Update submodule references"
+  git push
+fi

@@ -1,0 +1,3 @@
+[submodule "queuetie-app"]
+	path = packages/queuetie-app
+	url = https://github.com/dejan-babic-symphony/queuetie-app
