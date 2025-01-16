@@ -14,5 +14,14 @@
   "bugs": {
     "url": "https://github.com/dejan-babic-symphony/queuetie/issues"
   },
-  "homepage": "https://github.com/dejan-babic-symphony/queuetie#readme"
+  "homepage": "https://github.com/dejan-babic-symphony/queuetie#readme",
+  "type": "module",
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install"
+  }
 }
