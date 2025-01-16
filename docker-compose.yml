@@ -1,0 +1,60 @@
+version: "3.4"
+
+services:
+  app:
+    container_name: queuetie-app
+    build:
+      context: ./queuetie-app
+      dockerfile: ./Dockerfile
+      target: build-stage
+    command: /bin/sh -c "npx vite --host"
+    env_file:
+      - .env.docker
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "5173:5173"
+    volumes:
+      - "./queuetie-app/src:/app/src"
+      - "./queuetie-app/public:/app/public"
+    networks:
+      - queuetie
+  gateway:
+    container_name: queuetie-gateway
+    build:
+      context: ./queuetie-gateway
+      dockerfile: ./Dockerfile
+      target: development
+    command: /bin/sh -c "npm run start:remote"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env.docker
+    ports:
+      - "3000:3000"
+    volumes:
+      - "./queuetie-gateway/:/usr/src/app"
+    networks:
+      - queuetie
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "redis:/data"
+    networks:
+      - queuetie
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
+networks:
+  queuetie:
+    driver: bridge
+volumes:
+  redis:
+    driver: local
